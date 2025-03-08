@@ -10,10 +10,9 @@ class Employee(models.Model):
     employee_position = models.CharField(
         max_length=100, blank=True, null=True, verbose_name="Должность"
     )
-    trackers = models.ForeignKey(
-        'tracker.Tracker', on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Задача",
-        related_name="trackers"
-    )
+    # trackers = models.ManyToManyField(
+    #     Tracker, blank=True, null=True, verbose_name="Задача"
+    # )
 
     class Meta:
         verbose_name = "Сотрудник"

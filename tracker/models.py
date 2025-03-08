@@ -16,19 +16,18 @@ class Tracker(models.Model):
     title = models.CharField(
         max_length=100, verbose_name="Название"
     )
-    employee = models.ForeignKey(
-        'employee.Employee', on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Исполнитель",
-        related_name='employee'
-    )
     related_tracker = models.ForeignKey(
         "self", on_delete=models.SET_NULL, verbose_name="Связанная приятная задача", blank=True, null=True
     )
-    time = models.TimeField(
+    time = models.CharField(
         blank=True, null=True, verbose_name="Срок выполнения"
     )
     status = models.CharField(
         max_length=100, choices=STATUS_CHOICE, default='inactive', blank=True, null=True,
         verbose_name="Статус выполнения"
+    )
+    employees = models.ManyToManyField(
+        Employee, blank=True, null=True, verbose_name="Сотрудники", related_name="trackers"
     )
 
     class Meta:
