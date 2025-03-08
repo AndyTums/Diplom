@@ -9,7 +9,7 @@ from tracker.views import TrackerViewset
 app_name = TrackerConfig.name
 
 router = DefaultRouter()
-router.register("", TrackerViewset, basename="employee")
+router.register("", TrackerViewset, basename="tracker")
 
 urlpatterns = []
 

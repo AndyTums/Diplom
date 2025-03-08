@@ -8,7 +8,7 @@ from tracker.serializer import TrackerSerializer
 
 
 class TrackerViewset(viewsets.ModelViewSet):
-    """ViewSet для модели TACKER"""
+    """ViewSet для модели TRACKER"""
 
     queryset = Tracker.objects.all()
     serializer_class = TrackerSerializer
