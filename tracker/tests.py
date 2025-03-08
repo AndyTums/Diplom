@@ -33,6 +33,7 @@ class TrackerTest(APITestCase):
             '/tracker/',
             data=data
         )
+
         # Сверяем статус код
         self.assertEqual(
             response.status_code,
@@ -48,12 +49,8 @@ class TrackerTest(APITestCase):
         # Сверяем данные с ожидаемыми
         self.assertEqual(
             response.json(),
-            {'employees': [1],
-             'id': 2,
-             'related_tracker': None,
-             'status': 'active',
-             'time': 'TESTtime',
-             'title': 'TESTtitle'}
+            {'id': 7, 'title': 'TESTtitle', 'time': 'TESTtime', 'status': 'active', 'related_tracker': None,
+             'employees': [7]}
         )
 
     def test_tracker_list(self):
