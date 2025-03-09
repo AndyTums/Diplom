@@ -118,7 +118,11 @@ docker-compose up --build
 
 ## Документация API
 
-Автоматическая документация API будет доступна по адресу: [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
+Автоматическая документация API будет доступна по адресу: 
+
+[http://localhost:8000/redoc/](http://localhost:8000/redoc/) - REDOC 
+
+[http://localhost:8000/swagger/](http://localhost:8000/swagger/) - SWAGGER
 
 ## Тестирование
 
