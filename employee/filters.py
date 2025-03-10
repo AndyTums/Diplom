@@ -39,4 +39,3 @@ class EmployeeFilter(django_filters.FilterSet):
 
         # Объединяем результаты
         return queryset.filter(pk__in=parent_tasks_employees | possible_employees)
-

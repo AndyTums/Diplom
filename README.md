@@ -68,6 +68,31 @@
 9. **Тестирование**: Тесты для всех основных функций платформы, покрытие минимум 75%.
 10. **Автодокументация**: Автогенерируемая документация API с использованием Swagger или ReDoc.
 
+### Фильтрация
+
+#### В данном проекте, как было указанно выше используются кастомные фильтры:
+
+Модели Employee:
+
+1. Фильтрация сотрудника по количеству задач <=
+    [http://localhost:8000/employee/?count_lte=2](http://localhost:8000/employee/?count_lte=2)
+2. Фильтрация сотрудника по количеству задач >=
+    [http://localhost:8000/employee/?count_gte=2](http://localhost:8000/employee/?count_gte=2)
+3. Фильтрация сотрудников которые менее нагружены(имеют максимум на 2 задачи больше от самого разгруженного) или
+    выполняет связанную задачу.
+
+    [http://localhost:8000/employee/?can_take_task=True](http://localhost:8000/employee/??can_take_task=True)
+
+Модели Tracker:
+
+1. Фильтрация задачи по статусу
+    [http://localhost:8000/tracker/?status=active](http://localhost:8000/tracker/?status=active)
+2. Фильтрация по наличию связанной задачи
+    [http://localhost:8000/tracker/?related_tracker_isnull=True](http://localhost:8000/tracker/?related_tracker_isnull=True)
+3. Фильтрация по статусу связанной задачи
+    [http://localhost:8000/tracker/?related_tracker_status=active](http://localhost:8000/tracker/?related_tracker_status=active)
+
+
 ## Установка и запуск
 
 1. Клонируйте репозиторий:
