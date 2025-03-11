@@ -91,7 +91,8 @@
     [http://localhost:8000/tracker/?related_tracker_isnull=True](http://localhost:8000/tracker/?related_tracker_isnull=True)
 3. Фильтрация по статусу связанной задачи
     [http://localhost:8000/tracker/?related_tracker_status=active](http://localhost:8000/tracker/?related_tracker_status=active)
-
+4. Фильтрация важных задач
+    [http://localhost:8000/tracker/?important_trackers=true](http://localhost:8000/tracker/?important_trackers=true)
 
 ## Установка и запуск
 

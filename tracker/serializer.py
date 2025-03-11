@@ -8,11 +8,3 @@ class TrackerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tracker
         fields = '__all__'
-
-    # def to_representation(self, instance):
-    #     representation = super().to_representation(instance)
-    #     return {
-    #         'Важная задача': representation['title'],
-    #         'Срок': representation['time'],
-    #         '[ФИО сотрудника]': representation['employee']['fio'],
-    #     }

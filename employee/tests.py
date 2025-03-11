@@ -66,7 +66,7 @@ class EmployeeTest(APITestCase):
               'tracker_count': 0}]
         )
 
-        # Сверяем ожидаемое количество Habit в БД
+        # Сверяем ожидаемое количество Employee в БД
         self.assertEqual(
             Employee.objects.count(),
             1

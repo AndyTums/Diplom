@@ -19,34 +19,39 @@ class TrackerViewset(viewsets.ModelViewSet):
     ordering_fields = ('id', 'status')
 
     def list(self, request, *args, **kwargs):
-        """ Вывод информации списка согласно шаблона """
+        """Вывод информации списка согласно шаблона"""
 
-        # Получаем отфильтрованные задачи
-        filtered_queryset = self.filter_queryset(self.get_queryset())
+        filter_params = request.query_params
+        print(filter_params)
 
-        if filtered_queryset.exists():
+        # Проверяем наличие фильтра в запросе
+        if filter_params.get("important_trackers").lower() == "true":
 
             # Формируем ответ, если есть отфильтрованные задачи
-            serializer = self.get_serializer(filtered_queryset, many=True)
-
+            queryset = self.filter_queryset(self.get_queryset())  # Получаем отфильтрованный queryset
+            serializer = self.get_serializer(queryset, many=True)  # Сериалзация
             formatted_response = []
 
             for item in serializer.data:
-
-                # Получаем ID сотрудников и извлекаем их информацию
+                # Получаем ID сотрудников
                 employee_ids = item['employees']
+                # Фильтруем сотрудник по ID
                 employee_info = Employee.objects.filter(id__in=employee_ids)
 
-                # Форматируем ответ для каждой задачи
-                employee_names = [employee.fio for employee in employee_info]  # Достаев ФИО аждого сотрудника
+                # Достаем ФИО каждого необходимого сотрудника
+                employee_names = [employee.fio for employee in employee_info]
 
+                # Создаем необходимый формат ответа
                 formatted_response.append({
+
                     "Важная задача": item['title'],
                     "Срок выполнения": item['time'],
-                    "Выполняющие": employee_names,  # Добавляем имена сотрудников
+                    "Выполняющие": employee_names,
                 })
 
-            return Response(formatted_response)  # Возвращаем сформированный ответ после цикла
+            return Response(formatted_response)
+
         else:
-            # Если задач нет, возвращаем пустой список
-            return Response([])
+            queryset = self.get_queryset()  # Получаем все объекты
+            serializer = self.get_serializer(queryset, many=True)  # Сериализация
+            return Response(serializer.data)

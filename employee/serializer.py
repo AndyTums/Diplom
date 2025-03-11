@@ -5,6 +5,7 @@ from employee.models import Employee
 class EmployeeSerializer(serializers.ModelSerializer):
     """ Сериализатор для модели EMPLOYEE """
 
+    # Вывод поля tracker_count только для чтения
     tracker_count = serializers.IntegerField(read_only=True)
 
     class Meta:

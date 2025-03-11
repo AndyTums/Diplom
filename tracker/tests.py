@@ -112,7 +112,7 @@ class TrackerTest(APITestCase):
             status.HTTP_200_OK
         )
 
-        # Сверяем ожидаемое количество Employee в БД
+        # Сверяем ожидаемое количество Tracker в БД
         self.assertEqual(
             Tracker.objects.count(),
             1
@@ -135,7 +135,7 @@ class TrackerTest(APITestCase):
             status.HTTP_204_NO_CONTENT
         )
 
-        # Сверяем ожидаемое количество Employee в БД
+        # Сверяем ожидаемое количество Tracker в БД
         self.assertEqual(
             Tracker.objects.count(),
             0
