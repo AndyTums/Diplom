@@ -25,7 +25,7 @@ class TrackerViewset(viewsets.ModelViewSet):
         print(filter_params)
 
         # Проверяем наличие фильтра в запросе
-        if filter_params.get("important_trackers").lower() == "true":
+        if filter_params.get("important_trackers") == "True":
 
             # Формируем ответ, если есть отфильтрованные задачи
             queryset = self.filter_queryset(self.get_queryset())  # Получаем отфильтрованный queryset
