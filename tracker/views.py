@@ -25,7 +25,7 @@ class TrackerViewset(viewsets.ModelViewSet):
         print(filter_params)
 
         # Проверяем наличие фильтра в запросе
-        if filter_params.get("important_trackers") == "True":
+        if filter_params is not None and filter_params.get("important_trackers") is True:
 
             # Формируем ответ, если есть отфильтрованные задачи
             queryset = self.filter_queryset(self.get_queryset())  # Получаем отфильтрованный queryset
@@ -52,6 +52,6 @@ class TrackerViewset(viewsets.ModelViewSet):
             return Response(formatted_response)
 
         else:
-            queryset = self.get_queryset()  # Получаем все объекты
+            queryset = self.filter_queryset(self.get_queryset())  # Получаем все объекты
             serializer = self.get_serializer(queryset, many=True)  # Сериализация
             return Response(serializer.data)
