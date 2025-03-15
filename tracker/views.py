@@ -21,20 +21,26 @@ class TrackerViewset(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         """Вывод информации списка согласно шаблона"""
 
+        # Получаем отфильтрованный список
+        queryset = self.filter_queryset(self.get_queryset())
+
+        # Сериализация
+        serializer = self.get_serializer(queryset, many=True)
+
+        # Список заданных параметров на фильтрацию в поисковой строке
         filter_params = request.query_params
-        print(filter_params)
 
         # Проверяем наличие фильтра в запросе
-        if filter_params is not None and filter_params.get("important_trackers") is True:
+        if filter_params.get("important_trackers") == "true":
 
             # Формируем ответ, если есть отфильтрованные задачи
-            queryset = self.filter_queryset(self.get_queryset())  # Получаем отфильтрованный queryset
-            serializer = self.get_serializer(queryset, many=True)  # Сериалзация
             formatted_response = []
 
             for item in serializer.data:
+
                 # Получаем ID сотрудников
                 employee_ids = item['employees']
+
                 # Фильтруем сотрудник по ID
                 employee_info = Employee.objects.filter(id__in=employee_ids)
 
@@ -51,7 +57,4 @@ class TrackerViewset(viewsets.ModelViewSet):
 
             return Response(formatted_response)
 
-        else:
-            queryset = self.filter_queryset(self.get_queryset())  # Получаем все объекты
-            serializer = self.get_serializer(queryset, many=True)  # Сериализация
-            return Response(serializer.data)
+        return Response(serializer.data)

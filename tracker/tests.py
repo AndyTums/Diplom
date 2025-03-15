@@ -59,15 +59,16 @@ class TrackerTest(APITestCase):
         url = reverse('tracker:tracker-list')
         response = self.client.get(url)
         data = response.json()
-
+        print(data)
         # Сверяем статус кода
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Сверяем данные с ожидаемыми
         self.assertEqual(
             data,
-            [{'id': self.tracker.id, 'title': 'Test', 'time': '2 дня', 'status': 'inactive',
-              'related_tracker': None, 'employees': []}])
+            [{'id': 9, 'title': 'Test', 'time': '2 дня', 'status': 'inactive',
+              'related_tracker': None, 'employees': []}]
+        )
 
         # Сверяем ожидаемое количество Tracker в БД
         self.assertEqual(

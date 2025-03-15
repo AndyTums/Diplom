@@ -37,8 +37,5 @@ class TrackerFilter(django_filters.FilterSet):
         related_tracker_status_check = queryset.filter(related_tracker__status="active")
 
         # Объединяем условия
-        return queryset.filter(
-            Q(pk__in=status_check) &
-            Q(pk__in=related_tracker_check) &
-            Q(pk__in=related_tracker_status_check)
-        )
+        return queryset.filter(Q(pk__in=status_check) & Q(pk__in=related_tracker_check) &
+                               Q(pk__in=related_tracker_status_check))
